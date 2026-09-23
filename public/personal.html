@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ecf7ff" />
+  <meta name="description" content="Personal homepage of a seasoned software engineer based in Hangzhou, China." />
+  <title>About Me · Software Engineer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>" />
+  <style>
+    :root {
+      --blue: #2563eb;
+      --cyan: #06b6d4;
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --muted: #94a3b8;
+      --bg: #f4f9ff;
+      --card: #ffffff;
+      --grad: linear-gradient(135deg, #2563eb, #06b6d4);
+      --radius: 18px;
+      --shadow: 0 12px 34px rgba(37, 99, 235, 0.10);
+      --shadow-lg: 0 22px 50px rgba(37, 99, 235, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+        radial-gradient(1000px 480px at 85% -80px, rgba(6, 182, 212, 0.18), transparent 70%),
+        radial-gradient(900px 460px at 0% 0%, rgba(37, 99, 235, 0.16), transparent 65%),
+        var(--bg);
+      background-size: 42px 42px, 42px 42px, auto, auto, auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: min(1080px, 92vw); margin: 0 auto; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.10);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 800; letter-spacing: .3px; }
+    .logo-mark {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 11px; color: #fff; background: var(--grad);
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-weight: 700; font-size: 15px;
+      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.4);
+    }
+    .logo-code { color: var(--blue); }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex: none;
+      display: grid; place-items: center;
+      color: #fff; font-weight: 800; font-size: 15px; letter-spacing: 1px;
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      background: var(--grad);
+      border: 3px solid #fff;
+      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.35);
+      user-select: none;
+    }
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a {
+      color: var(--ink-soft); text-decoration: none; font-size: 15px;
+      padding: 8px 14px; border-radius: 10px; transition: all .2s;
+    }
+    .nav a:hover { color: var(--blue); background: rgba(37, 99, 235, 0.08); }
+    .nav-toggle {
+      display: none; background: none; border: 1px solid rgba(37, 99, 235, 0.25);
+      width: 42px; height: 42px; border-radius: 11px; cursor: pointer;
+      flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    }
+    .nav-toggle span { width: 20px; height: 2.5px; background: var(--blue); border-radius: 2px; transition: all .25s; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 64px 0 34px; text-align: center; position: relative; }
+    .hello-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; border: 1px solid rgba(37, 99, 235, 0.2);
+      color: var(--blue); font-size: 13px; font-weight: 700;
+      padding: 7px 16px; border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
+    }
+    .hello-badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,.5);} 50% { box-shadow: 0 0 0 6px rgba(6,182,212,0);} }
+
+    .hero h1 {
+      font-size: clamp(34px, 5.5vw, 56px); margin: 20px 0 8px; font-weight: 900; letter-spacing: -1px;
+    }
+    .typing { color: var(--blue); }
+    .name {
+      background: var(--grad); -webkit-background-clip: text; background-clip: text;
+      color: transparent; padding: 0 8px;
+    }
+    .typed { display: inline-block; font-family: ui-monospace, Consolas, monospace; color: var(--blue); }
+    .typed::after { content: "▍"; color: var(--cyan); animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-sub { color: var(--ink-soft); font-size: 17px; max-width: 620px; margin: 10px auto 0; line-height: 1.8; }
+
+    .hero-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+    .hero-tags span {
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      background: #fff; border: 1px solid rgba(37, 99, 235, 0.22);
+      padding: 7px 16px; border-radius: 999px;
+    }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      padding: 6px 0 4px;
+    }
+    .stat {
+      background: var(--card); border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: var(--radius); padding: 20px 16px; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat b {
+      display: block; font-size: 26px; font-weight: 900; background: var(--grad);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .stat span { font-size: 13px; color: var(--muted); margin-top: 4px; display: block; }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: 40px 0; }
+    .sec-head { margin-bottom: 24px; }
+    .sec-head .tag {
+      font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cyan); display: block; margin-bottom: 8px;
+    }
+    .sec-head h2 { font-size: clamp(24px, 3.5vw, 34px); margin: 0; font-weight: 900; letter-spacing: -.5px; }
+
+    /* Profile grid */
+    .profile-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch;
+    }
+    .p-card {
+      background: var(--card); border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: var(--radius); padding: 22px 20px; box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: 10px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .p-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .p-icon {
+      width: 46px; height: 46px; display: grid; place-items: center;
+      border-radius: 13px; color: #fff; background: var(--grad);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    }
+    .p-icon svg { width: 24px; height: 24px; }
+    .p-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .p-card .value { font-size: 21px; font-weight: 800; }
+    .p-card .sub { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* Timeline */
+    .timeline { position: relative; margin: 8px 0 0; padding-left: 34px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 9px; top: 6px; bottom: 6px;
+      width: 3px; border-radius: 3px;
+      background: linear-gradient(180deg, var(--blue), var(--cyan));
+    }
+    .tl-item { position: relative; padding: 0 0 30px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ""; position: absolute; left: -31px; top: 5px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #fff; border: 4px solid var(--blue);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+    .tl-dot-cyan::before { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15); }
+    .tl-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .tl-year {
+      font-family: ui-monospace, Consolas, monospace; font-weight: 800; color: #fff;
+      background: var(--grad); padding: 4px 12px; border-radius: 999px; font-size: 13px;
+    }
+    .tl-title { font-size: 19px; font-weight: 800; }
+    .tl-sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+    .tl-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.8; margin-top: 8px; }
+
+    /* Code card */
+    .code-card {
+      background: #0b1220; color: #e2e8f0; border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); overflow: hidden;
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 15px;
+    }
+    .code-bar {
+      display: flex; gap: 8px; align-items: center; padding: 12px 16px;
+      background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .code-bar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .code-bar i:nth-child(1) { background: #ff5f57; }
+    .code-bar i:nth-child(2) { background: #febc2e; }
+    .code-bar i:nth-child(3) { background: #28c840; }
+    .code-bar span { margin-left: 8px; font-size: 13px; color: #64748b; }
+    .code-body { padding: 18px 20px 22px; line-height: 1.9; overflow-x: auto; white-space: pre; }
+    .code-body .k { color: #93c5fd; }
+    .code-body .s { color: #86efac; }
+    .code-body .n { color: #fbbf24; }
+    .code-body .c { color: #64748b; font-style: italic; }
+
+    /* ---------- Decor orbs ---------- */
+    .hero { overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; z-index: -1; pointer-events: none; }
+    .orb-1 {
+      width: 340px; height: 340px; top: -90px; left: -80px;
+      background: radial-gradient(circle at 30% 30%, #60a5fa, transparent 70%);
+      animation: orbFloat 9s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 280px; height: 280px; bottom: -60px; right: -70px;
+      background: radial-gradient(circle at 60% 40%, #22d3ee, transparent 70%);
+      animation: orbFloat 7s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(26px, -22px) scale(1.12); }
+    }
+
+    /* ---------- Hero avatar with spinning ring ---------- */
+    .avatar-big { width: 104px; height: 104px; margin: 22px auto 0; position: relative; animation: riseIn .8s cubic-bezier(.2,.7,.3,1) both; }
+    .avatar-big::before {
+      content: ""; position: absolute; inset: -9px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #2563eb, #06b6d4, #a855f7, #f59e0b, #2563eb);
+      animation: spin 6s linear infinite;
+    }
+    .avatar-big .face {
+      position: absolute; inset: 3px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--grad); color: #fff;
+      font-family: ui-monospace, Consolas, monospace; font-weight: 800; font-size: 34px; letter-spacing: 1px;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,.35);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(26px) scale(.85); } }
+
+    /* ---------- Shimmer gradient text ---------- */
+    .shimmer {
+      background: linear-gradient(110deg, #2563eb 18%, #22d3ee 38%, #a855f7 60%, #2563eb 82%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmerMove 4s linear infinite;
+    }
+    @keyframes shimmerMove { to { background-position: -220% 0; } }
+
+    /* ---------- Scroll hint ---------- */
+    .scroll-hint {
+      display: inline-flex; justify-content: center; margin-top: 30px;
+      width: 26px; height: 44px; border: 2px solid rgba(37,99,235,.35); border-radius: 14px;
+      text-decoration: none; position: relative;
+    }
+    .scroll-hint span {
+      width: 4px; height: 9px; border-radius: 3px; background: var(--blue);
+      position: absolute; top: 8px; animation: wheel 1.6s ease-in-out infinite;
+    }
+    @keyframes wheel { 0% { opacity: 0; } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(18px); } }
+
+    /* ---------- Card shine sweep & icon spark ---------- */
+    .p-card { position: relative; overflow: hidden; }
+    .p-card::before {
+      content: ""; position: absolute; top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: skewX(-20deg); transition: left .65s ease;
+    }
+    .p-card:hover::before { left: 135%; }
+    .p-icon { transition: transform .3s ease; }
+    .p-card:hover .p-icon { transform: scale(1.12) rotate(-7deg); }
+
+    /* ---------- Photo gallery ---------- */
+    .gal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gal-card {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 4 / 3; cursor: pointer; box-shadow: var(--shadow);
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      display: block; text-decoration: none;
+    }
+    .gal-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease, filter .7s ease; }
+    .gal-card:hover img { transform: scale(1.14) rotate(1deg); }
+    .gal-card::after {
+      content: ""; position: absolute; inset: 0; border: 3px solid transparent;
+      border-radius: var(--radius); transition: border-color .3s;
+      pointer-events: none;
+    }
+    .gal-card:hover::after { border-color: rgba(255,255,255,.4); }
+    .gal-emoji {
+      position: absolute; top: 10px; right: 12px; font-size: 24px; z-index: 2;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,.35));
+      transition: transform .4s ease;
+    }
+    .gal-card:hover .gal-emoji { transform: scale(1.25) rotate(8deg); }
+    .gal-cap {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      padding: 40px 16px 14px; color: #fff;
+      background: linear-gradient(180deg, transparent, rgba(2,6,23,.85));
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .gal-cap b { font-size: 17px; transform: translateY(4px); transition: transform .3s; }
+    .gal-cap span { font-size: 13px; color: #cbd5e1; transform: translateY(4px); opacity: 0; transition: all .3s; }
+    .gal-card:hover .gal-cap b, .gal-card:hover .gal-cap span { transform: translateY(0); }
+    .gal-card:hover .gal-cap span { opacity: 1; }
+    .gal-card.img-fail img { display: none; }
+    .gal-card.img-fail .gal-emoji { font-size: 64px; top: 46%; right: auto; left: 50%; transform: translate(-50%, -50%); }
+
+    /* ---------- Destination marquee ---------- */
+    .strip {
+      overflow: hidden; white-space: nowrap; border-radius: var(--radius);
+      background: #0b1220; color: #e2e8f0; box-shadow: var(--shadow-lg);
+      padding: 13px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .strip-track { display: inline-block; animation: drift 26s linear infinite; will-change: transform; }
+    .strip-track span { margin: 0 26px; font-size: 15px; letter-spacing: .5px; }
+    .strip-track span::before { content: "📍 "; }
+    .strip:hover .strip-track { animation-play-state: paused; }
+    @keyframes drift { to { transform: translateX(-50%); } }
+
+    /* ---------- Scroll progress bar ---------- */
+    .progress {
+      position: fixed; top: 0; left: 0; height: 4px; width: 0; z-index: 90;
+      background: var(--grad); box-shadow: 0 0 12px rgba(37,99,235,.55);
+      transition: width .08s linear;
+    }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+    .reveal.in { opacity: 1; transform: none; }
+    .site-footer { margin-top: auto; text-align: center; padding: 28px 0; color: var(--muted); font-size: 14px; border-top: 1px solid rgba(37, 99, 235, 0.10); }
+    .site-footer b { color: var(--blue); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 860px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .profile-grid { grid-template-columns: repeat(2, 1fr); }
+      .gal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .nav { display: none; position: absolute; top: 62px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 4px; background: #fff; border-bottom: 1px solid rgba(37,99,235,.12); padding: 12px 4vw 16px; box-shadow: var(--shadow); }
+      .nav.open { display: flex; }
+      .nav a { padding: 12px 12px; }
+      .nav-toggle { display: flex; }
+      .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-toggle.open span:nth-child(2) { opacity: 0; }
+      .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .hero { padding: 40px 0 24px; }
+      .stats, .profile-grid { grid-template-columns: 1fr; }
+      .gal-grid { grid-template-columns: 1fr; }
+      section.block { padding: 28px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress" id="progressBar"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>cube<span class="logo-code">lee</span></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#profile">Profile</a>
+        <a href="#hobbies">Life</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-right">
+        <span class="avatar" title="cubelee">CL</span>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="container hero" id="about">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <span class="hello-badge"><span class="pulse"></span> OPEN TO CHAT · HANGZHOU, CHINA</span>
+      <div class="avatar-big"><span class="face">CL</span></div>
+      <h1>Hi, I'm <span class="name shimmer">cubelee</span> <span class="typing"><span class="typed" id="typed"></span></span></h1>
+      <p class="hero-sub">
+        A software engineer and proud Anhui native. I started coding in 2015, graduated from
+        Huainan Normal University, and now build products locally in Hangzhou.
+      </p>
+      <div class="hero-tags">
+        <span>📱 App-friendly</span>
+        <span>🌐 Web-ready</span>
+        <span>🖥️ Responsive layout</span>
+        <span>✨ Animated &amp; lively</span>
+      </div>
+      <a class="scroll-hint" href="#profile" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- Stats -->
+    <section class="container">
+      <div class="stats">
+        <div class="stat reveal"><b data-count="35">0</b><span>Years Old</span></div>
+        <div class="stat reveal"><b data-count="11" data-suffix="+">0</b><span>Years Coding</span></div>
+        <div class="stat reveal"><b data-count="1">0</b><span>Sweet Daughter 💕</span></div>
+        <div class="stat reveal"><b>02</b><span>City · Hangzhou</span></div>
+      </div>
+    </section>
+
+    <!-- Profile -->
+    <section class="container block" id="profile">
+      <div class="sec-head reveal">
+        <span class="tag">Personal Profile</span>
+        <h2>About Me</h2>
+      </div>
+      <div class="profile-grid">
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <span class="label">Age</span>
+          <div class="value">35</div>
+          <div class="sub">Born to code, still young at heart.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg></div>
+          <span class="label">Gender</span>
+          <div class="value">Male</div>
+          <div class="sub">The guy who turns coffee into code.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 21h16"/><path d="M12 11V7"/><path d="M9 7h6"/></svg></div>
+          <span class="label">Marital Status</span>
+          <div class="value">Married 💍</div>
+          <div class="sub">Married, and life is full of horsepower.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12"/><path d="M6 8h12"/><path d="M7 8v13l5-3 5 3V8"/></svg></div>
+          <span class="label">Family</span>
+          <div class="value">1 Daughter</div>
+          <div class="sub">A proud dad of one lovely girl.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <span class="label">Education</span>
+          <div class="value">Graduated 2015 🎓</div>
+          <div class="sub">Huainan Normal University · Anhui Province</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <span class="label">Hometown</span>
+          <div class="value">Anhui 🇨🇳</div>
+          <div class="sub">Proud Anhui native, Huainan roots.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span class="label">Location</span>
+          <div class="value">Hangzhou</div>
+          <div class="sub">Living locally in the city of Alibaba &amp; West Lake.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life · Hobbies & Dream -->
+    <section class="container block" id="hobbies">
+      <div class="sec-head reveal">
+        <span class="tag">Life Outside Code</span>
+        <h2>Hobbies &amp; Dreams</h2>
+      </div>
+      <div class="profile-grid hobby-grid">
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12h11"/><path d="M7 12a5 5 0 0 0-5 5v1h6"/><path d="M17 12a5 5 0 0 1 5 5v1h-6"/><path d="M7 18h10"/><path d="M12 12V5.5"/><ellipse cx="12" cy="4" rx="1.8" ry="1.4"/></svg></div>
+          <span class="label">Hobby</span>
+          <div class="value">Fishing 🎣</div>
+          <div class="sub">Patience is my superpower — just like debugging.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m7 15 3-3 2 2 5-5"/></svg></div>
+          <span class="label">Hobby</span>
+          <div class="value">Movies 🎬</div>
+          <div class="sub">Movie nights are my favourite showreel.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l1.5-4.5h11L19 11"/><path d="M3 11h18a1 1 0 0 1 1 1v4h-2a2 2 0 0 1-4 0H8a2 2 0 0 1-4 0H2v-4a1 1 0 0 1 1-1z"/></svg></div>
+          <span class="label">Hobby</span>
+          <div class="value">Driving 🚗</div>
+          <div class="sub">Anywhere the road takes me, windows down.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4"/><path d="M8 9v4"/><rect x="15" y="5" width="6" height="6" rx="1"/><path d="M4 20h6"/><path d="M11 20a3 3 0 0 1 6 0"/><path d="M7 20v-1"/></svg></div>
+          <span class="label">Hobby</span>
+          <div class="value">Gaming 🎮</div>
+          <div class="sub">Quest-log full of levels and boss fights.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <span class="label">Hobby</span>
+          <div class="value">Singing 🎤</div>
+          <div class="sub">KTV singer with a live performance attitude.</div>
+        </div>
+        <div class="p-card reveal">
+          <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg></div>
+          <span class="label">My Dream</span>
+          <div class="value">Travel China 🧭</div>
+          <div class="sub">Dream goal: travel around the whole of China, province by province.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery · Dream destinations -->
+    <section class="container block" id="gallery">
+      <div class="sec-head reveal">
+        <span class="tag">Wish-List Photos</span>
+        <h2>Places I Dream to Visit 🗺️</h2>
+      </div>
+      <div class="gal-grid">
+        <a class="gal-card reveal" style="--i:0" data-emoji="🏯" href="https://www.chinadiscovery.com/hangzhou-tours/west-lake.html" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=640&q=60" alt="West Lake, Hangzhou" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">🏯</span>
+          <span class="gal-cap"><b>West Lake · Hangzhou</b><span>My home city's dreamy lake</span></span>
+        </a>
+        <a class="gal-card reveal" style="--i:1" data-emoji="🧱" href="https://en.wikipedia.org/wiki/Great_Wall_of_China" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1546587348-d12660c30c50?auto=format&fit=crop&w=640&q=60" alt="The Great Wall, Beijing" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">🧱</span>
+          <span class="gal-cap"><b>Great Wall · Beijing</b><span>Walk the wall my ancestors built</span></span>
+        </a>
+        <a class="gal-card reveal" style="--i:2" data-emoji="⛰️" href="https://en.wikipedia.org/wiki/Mount_Huang" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1512543070209-9f9d6d37f306?auto=format&fit=crop&w=640&q=60" alt="Mount Huangshan, Anhui" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">⛰️</span>
+          <span class="gal-cap"><b>Mount Huangshan · Anhui</b><span>My province, sea of clouds</span></span>
+        </a>
+        <a class="gal-card reveal" style="--i:0" data-emoji="🛶" href="https://en.wikipedia.org/wiki/Li_River" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=640&q=60" alt="Li River, Guilin" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">🛶</span>
+          <span class="gal-cap"><b>Li River · Guilin</b><span>Raft through the karst peaks</span></span>
+        </a>
+        <a class="gal-card reveal" style="--i:1" data-emoji="🏔️" href="https://en.wikipedia.org/wiki/Lhasa" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1518987048-93e29699e79a?auto=format&fit=crop&w=640&q=60" alt="Potala Palace, Lhasa" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">🏔️</span>
+          <span class="gal-cap"><b>Lhasa · Tibet</b><span>The roof of the world</span></span>
+        </a>
+        <a class="gal-card reveal" style="--i:2" data-emoji="🌉" href="https://en.wikipedia.org/wiki/Zhangjiajie" target="_blank" rel="noopener">
+          <img src="https://images.unsplash.com/photo-1515581243902-574cf0f9f9d7?auto=format&fit=crop&w=640&q=60" alt="Zhangjiajie, Hunan" loading="lazy" referrerpolicy="no-referrer" />
+          <span class="gal-emoji">🌉</span>
+          <span class="gal-cap"><b>Zhangjiajie · Hunan</b><span>The Avatar floating mountains</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Destination marquee -->
+    <section class="container" aria-label="Dream destinations ticker">
+      <div class="strip reveal">
+        <div class="strip-track" id="stripTrack">
+          <span>West Lake</span><span>Great Wall</span><span>Huangshan</span><span>Guilin</span><span>Lhasa</span><span>Zhangjiajie</span><span>Chengdu</span><span>Xi'an</span><span>Sanya</span><span>Lijiang</span><span>Chongqing</span><span>Qingdao</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey -->
+    <section class="container block" id="journey">
+      <div class="sec-head reveal">
+        <span class="tag">Career Journey</span>
+        <h2>My Timeline</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-head"><span class="tl-year">2015</span><div>
+            <div class="tl-title">Graduation · Huainan Normal University</div>
+            <div class="tl-sub">Began the journey into software engineering.</div>
+          </div></div>
+          <p class="tl-desc">
+            Finished university and took the first step into the programming world — open source,
+            self-learning, and the very first lines of production code.
+          </p>
+        </div>
+        <div class="tl-item tl-dot-cyan reveal">
+          <div class="tl-head"><span class="tl-year">2015 — Now</span><div>
+            <div class="tl-title">Software Engineer / Programmer</div>
+            <div class="tl-sub">Building for the world, one feature at a time.</div>
+          </div></div>
+          <p class="tl-desc">
+            Over a decade of building software — from front-end interfaces to back-end services,
+            delivering reliable products end to end. (This very page is fully responsive, ready for
+            both <b>web</b> and <b>app</b> clients. 📱🌐)
+          </p>
+        </div>
+      </div>
+
+      <div class="code-card reveal" style="margin-top: 30px;" aria-label="About me as code">
+        <div class="code-bar"><i></i><i></i><i></i><span>about-me.js</span></div>
+        <div class="code-body"><span class="k">const</span> dev = {
+  name: <span class="s">"cubelee"</span>,
+  age: <span class="n">35</span>,
+  gender: <span class="s">"male"</span>,
+  married: <span class="k">true</span>,
+  child: <span class="s">"one lovely daughter"</span>,
+  hometown: <span class="s">"Anhui Province 🇨🇳"</span>,
+  university: <span class="s">"Huainan Normal University"</span>,
+  experience: { start: <span class="n">2015</span>, status: <span class="s">"active"</span> },
+  location: <span class="s">"Hangzhou, China"</span>,
+  hobbies: [<span class="s">"fishing"</span>, <span class="s">"movies"</span>, <span class="s">"driving"</span>, <span class="s">"gaming"</span>, <span class="s">"singing"</span>],
+  dream: <span class="s">"travel around the whole of China 🧳"</span>,
+};</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <p>Made with <b>&lt;code /&gt;</b> and ☕ by <b>cubelee</b> in Hangzhou · Anhui born 🇨🇳 · <b>2015 — forever</b></p>
+    </div>
+  </footer>
+
+  <script>
+    const words = ["Software Engineer", "Full-Stack Developer", "Proud Anhui Native", "Weekend Angler 🎣", "Dream Traveller 🧳"];
+    let wi = 0, ci = 0, del = false;
+    const el = document.getElementById('typed');
+    (function typeLoop() {
+      const txt = words[wi];
+      if (!del) {
+        ci++;
+        el.textContent = txt.slice(0, ci);
+        if (ci === txt.length) { del = true; setTimeout(typeLoop, 1700); return; }
+        setTimeout(typeLoop, 95);
+      } else {
+        ci--;
+        el.textContent = txt.slice(0, ci);
+        if (ci === 0) { del = false; wi = (wi + 1) % words.length; setTimeout(typeLoop, 350); return; }
+        setTimeout(typeLoop, 42);
+      }
+    })();
+
+    const navBtn = document.getElementById('navToggle');
+    const navEl = document.getElementById('nav');
+    navBtn.addEventListener('click', () => {
+      navEl.classList.toggle('open');
+      navBtn.classList.toggle('open');
+    });
+    navEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navEl.classList.remove('open');
+      navBtn.classList.remove('open');
+    }));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(elW => io.observe(elW));
+
+    /* Count-up stats */
+    function countUp(el) {
+      const end = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1300, t0 = performance.now();
+      const step = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+    const ioCount = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { countUp(e.target); ioCount.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(elW => ioCount.observe(elW));
+
+    /* Gallery image fallback → gradient + emoji */
+    document.querySelectorAll('.gal-card img').forEach(img => {
+      img.addEventListener('error', () => img.closest('.gal-card').classList.add('img-fail'));
+    });
+
+    /* Marquee seamless loop */
+    const track = document.getElementById('stripTrack');
+    if (track) track.innerHTML += track.innerHTML;
+
+    /* Scroll progress bar */
+    const bar = document.getElementById('progressBar');
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>

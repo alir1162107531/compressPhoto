@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="在线批量图片压缩工具，支持 JPG、PNG、WebP 等格式，压缩前后对比与一键下载。" />
+  <title>图片压缩工具 - 在线批量压缩图片</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗜️</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand">
+        <span class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8" />
+            <path d="M2 18h20" />
+            <path d="M8 21h8" />
+            <path d="M9 17h6" />
+          </svg>
+        </span>
+        <span class="brand-text">图片压缩<em>工具</em></span>
+      </a>
+      <nav class="header-nav">
+        <a href="#uploader">开始压缩</a>
+        <a href="#howto">使用说明</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>在线图片压缩<span>·</span>轻松搞定</h1>
+      <p>无需上传到第三方，图片在服务端本地处理，安全可靠。支持 JPG、PNG、WebP 等常见格式，压缩前后效果一目了然。</p>
+    </section>
+
+    <section class="panel" id="uploader">
+      <div
+        id="dropZone"
+        class="drop-zone"
+        tabindex="0"
+        role="button"
+        aria-label="上传图片区域"
+      >
+        <div class="drop-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 1 1 0 9H4.5A3.5 3.5 0 0 1 4 14.9z" />
+            <path d="M12 12v9" />
+            <path d="m8 16 4-4 4 4" />
+          </svg>
+        </div>
+        <p class="drop-title">拖拽图片到此处</p>
+        <p class="drop-sub">或 <span class="drop-link">点击</span> 选择文件，可一次选择多张</p>
+        <div class="drop-hint">
+          <span>JPG</span><span>PNG</span><span>WebP</span><span>GIF</span><span>等格式</span>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden />
+      </div>
+
+      <div class="toolbar">
+        <div class="quality-box">
+          <span class="quality-label">压缩质量</span>
+          <div class="quality-presets" id="qualityPresets">
+            <button type="button" class="q-btn" data-quality="50">低 · 极限压缩</button>
+            <button type="button" class="q-btn is-active" data-quality="70">中 · 推荐</button>
+            <button type="button" class="q-btn" data-quality="90">高 · 高清</button>
+          </div>
+          <label class="quality-slider">
+            <input type="range" id="qualityRange" min="1" max="100" value="70" />
+            <span class="quality-value" id="qualityValue">70%</span>
+          </label>
+        </div>
+
+        <div class="file-bar" id="fileBar" hidden>
+          <div class="chip-list" id="fileList"></div>
+          <div class="bar-actions">
+            <button type="button" class="btn btn-ghost" id="clearFiles">清空</button>
+            <button type="button" class="btn btn-primary" id="compressBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8" />
+                <path d="M2 18h20" /><path d="M8 21h8" /><path d="M9 17h6" />
+              </svg>
+              开始压缩
+            </button>
+            <button type="button" class="btn btn-outline" id="downloadAllBtn" disabled>
+              打包下载全部
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results" id="results"></section>
+
+    <section class="howto" id="howto">
+      <h2>如何使用</h2>
+      <ol class="steps">
+        <li><b>1</b><span>上传或拖拽图片到绿色区域</span></li>
+        <li><b>2</b><span>根据需要选择压缩质量</span></li>
+        <li><b>3</b><span>对比压缩前后效果并一键下载</span></li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>图片压缩工具 · 本地部署 · 图片不会上传到任何外部服务器</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="busy" id="busy" hidden>
+    <div class="busy-box">
+      <div class="spinner"></div>
+      <p>正在压缩图片，请稍候…</p>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
